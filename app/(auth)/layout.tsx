@@ -26,7 +26,7 @@ export default function AuthLayout({
           <div className="w-full max-w-lg mb-4 flex items-center justify-center">
             <img
               className="aspect-15/8 rounded-2xl object-cover w-full transition-transform duration-300 hover:scale-110 hover:-rotate-6"
-              src="https://tailark.com//_next/image?url=%2Fmail2.png&w=3840&q=75"
+              src="/hero.png"
               alt="app screen"
               width="2700"
               height="1440"

@@ -179,6 +179,7 @@ export default function LandingPage() {
 
       {/* Why Choose LegalSnap Section */}
       <section className="py-32 relative bg-black">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/[0.02] to-transparent" />
         <div className="container mx-auto px-4 relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -202,15 +203,28 @@ export default function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="text-center p-8 bg-white/[0.05] rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 group"
+                whileHover={{ scale: 1.02, y: -4 }}
+                className="text-center p-8 bg-white/[0.02] rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 group border border-white/10 hover:border-orange-400/30 backdrop-blur-sm"
               >
-                <feature.icon className="h-12 w-12 text-orange-500 mx-auto mb-6 group-hover:scale-110 transition-transform duration-300" />
-                <h3 className="text-xl font-semibold mb-3 text-white">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-400">
-                  {feature.description}
-                </p>
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                
+                <div className="relative">
+                  <div className="mb-6">
+                    <div className="relative inline-block">
+                      <div className="absolute inset-0 bg-orange-400/20 rounded-lg blur group-hover:blur-md transition-all duration-300" />
+                      <div className="relative bg-orange-500/10 p-3 rounded-lg border border-orange-400/20 group-hover:border-orange-400/40 transition-colors duration-300">
+                        <feature.icon className="h-8 w-8 text-orange-500 mx-auto group-hover:scale-110 transition-transform duration-300" />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <h3 className="text-xl font-semibold mb-3 text-white group-hover:text-orange-100 transition-colors">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-400 group-hover:text-gray-300 transition-colors">
+                    {feature.description}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -327,49 +341,70 @@ export default function LandingPage() {
               Trusted by thousands of users across India
             </p>
           </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="p-8 bg-white/[0.05] border border-white/10 rounded-xl shadow-lg backdrop-blur-lg transition-all duration-300 hover:shadow-2xl hover:border-blue-400/50 hover:scale-[1.02] relative group"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-400/[0.3] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative">
-                  <div className="flex items-center mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-gray-400 mb-6 text-lg leading-relaxed">
-                    "{testimonial.content}"
-                  </p>
-                  <div className="flex items-center">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center">
-                      <span className="text-white font-semibold text-lg">{testimonial.name.charAt(0)}</span>
+<div className="overflow-hidden">
+            <div className="flex animate-marquee hover:animate-marquee-paused gap-8">
+              {[...testimonials, ...testimonials].map((testimonial, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: (index % testimonials.length) * 0.1 }}
+                  viewport={{ once: true }}
+                  className="flex-shrink-0 w-80 p-8 bg-white/[0.05] border border-white/10 rounded-xl shadow-lg backdrop-blur-lg transition-all duration-300 hover:shadow-2xl hover:border-blue-400/50 hover:scale-[1.02] relative group"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-400/[0.3] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl" />
+                  <div className="relative flex flex-col h-full">
+                    <div className="flex items-center mb-4">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                      ))}
                     </div>
-                    <div className="ml-4">
-                      <p className="font-semibold text-white">
-                        {testimonial.name}
-                      </p>
-                      <p className="text-sm text-gray-400">
-                        {testimonial.role}
-                      </p>
+                    <p className="text-gray-400 mb-6 text-lg leading-relaxed flex-grow">
+                      "{testimonial.content}"
+                    </p>
+                    <div className="flex items-center mt-auto">
+                      <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center">
+                        <span className="text-white font-semibold text-lg">{testimonial.name.charAt(0)}</span>
+                      </div>
+                      <div className="ml-4">
+                        <p className="font-semibold text-white">
+                          {testimonial.name}
+                        </p>
+                        <p className="text-sm text-gray-400">
+                          {testimonial.role}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </div>
+
+          <style jsx>{`
+            @keyframes marquee {
+              0% {
+                transform: translateX(0%);
+              }
+              100% {
+                transform: translateX(-50%);
+              }
+            }
+
+            .animate-marquee {
+              animation: marquee 30s linear infinite;
+            }
+
+            .animate-marquee-paused {
+              animation-play-state: paused;
+            }
+          `}</style>
         </div>
       </section>
 
       {/* FAQ Section */}
       <section className="py-32 relative bg-black">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/[0.02] to-transparent" />
         <div className="container mx-auto px-4 relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -384,33 +419,39 @@ export default function LandingPage() {
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
               Everything you need to know about LegalSnap
             </p>
-        </motion.div>
+          </motion.div>
 
           <div className="max-w-3xl mx-auto space-y-4">
             {faqs.map((faq, index) => (
-        <motion.div
+              <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white/[0.05] rounded-xl shadow-lg overflow-hidden"
+                className="bg-white/[0.02] rounded-xl shadow-xl overflow-hidden border border-white/10 hover:border-blue-400/30 transition-all duration-300 backdrop-blur-sm group"
               >
                 <button
-                  className="w-full p-6 text-left flex items-center justify-between hover:bg-blue-900/20 transition-colors"
+                  className="w-full p-6 text-left flex items-center justify-between hover:bg-blue-500/5 transition-colors duration-200"
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
-        >
-                  <span className="font-semibold text-white">{faq.question}</span>
+                >
+                  <span className="font-semibold text-white group-hover:text-blue-100 transition-colors pr-4">{faq.question}</span>
                   <ChevronDown
-                    className={`h-5 w-5 text-gray-400 transition-transform duration-200 ${
+                    className={`h-5 w-5 text-gray-400 group-hover:text-blue-300 transition-all duration-200 flex-shrink-0 ${
                       openFaq === index ? 'rotate-180' : ''
                     }`}
                   />
                 </button>
                 {openFaq === index && (
-                  <div className="px-6 pb-6">
-                    <p className="text-gray-400 leading-relaxed">{faq.answer}</p>
-                  </div>
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="px-6 pb-6"
+                  >
+                    <p className="text-gray-400 leading-relaxed border-t border-white/5 pt-4">{faq.answer}</p>
+                  </motion.div>
                 )}
               </motion.div>
             ))}
@@ -420,7 +461,7 @@ export default function LandingPage() {
 
       {/* CTA Section */}
       <section className="py-32 relative bg-black">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/[0.05] to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/[0.06] to-transparent" />
         <div className="container mx-auto px-4 relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -428,7 +469,7 @@ export default function LandingPage() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
             className="text-center max-w-3xl mx-auto"
-          >
+          > 
             <h2 className="text-4xl md:text-5xl font-bold mb-8 text-white">
               Ready to Get Expert Legal Advice?
             </h2>
@@ -436,17 +477,16 @@ export default function LandingPage() {
               Join thousands of users who trust LegalSnap for their legal guidance
             </p>
             <Link href={"/dashboard"}>
-            <Button
-              size="lg"
-              variant="outline"
-              className="h-14 px-8 text-lg border-blue-600/25 text-blue-400 hover:border-blue-600 hover:bg-blue-600 hover:text-white transition-all duration-300 group"
-            >
-              Start Legal Consultation Now
-              <ArrowUpRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
-            </Button>
+              <Button
+                size="lg"
+                className="h-14 px-8 text-lg bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 group transform hover:scale-105"
+              >
+                Start Legal Consultation Now
+                <ArrowUpRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </Button>
             </Link>
-        </motion.div>
-      </div>
+          </motion.div>
+        </div>
       </section>
 
       {/* Footer */}
@@ -456,8 +496,10 @@ export default function LandingPage() {
             <div>
               <Link href="/" className="flex items-center space-x-2 group mb-6">
                 <div className="relative">
-                  <div className="absolute inset-0 rotate-45 scale-0 bg-blue-600 transition-transform duration-300 group-hover:scale-100 rounded-lg" />
-                  <Scale className="h-6 w-6 text-blue-400 relative transition-transform duration-300 group-hover:scale-110" />
+                  <div className="absolute inset-0 rotate-45 scale-0 bg-blue-600 transition-transform duration-300 group-hover:scale-100 rounded-lg blur opacity-50" />
+                  <div className="relative bg-gradient-to-r from-blue-500 to-blue-600 p-2.5 rounded-lg">
+                    <Scale className="h-6 w-6 text-white relative transition-transform duration-300 group-hover:scale-110" />
+                  </div>
                 </div>
                 <span className="font-bold text-xl tracking-tight text-white">
                   LegalSnap
@@ -633,21 +675,37 @@ const premiumFeatures = [
 
 const testimonials = [
   {
-    content: "LegalSnap helped me understand my property dispute clearly. The voice interface made it so easy to explain my situation.",
-    name: "Priya from Bengaluru",
-    role: "Property Owner",
+    content:
+      "I was worried about tenancy rights, but LegalSnap gave me instant clarity and the confidence to act.",
+    name: "Naina Jain from Ajmer",
+    role: "Tenant",
   },
   {
-    content: "As a small business owner, I needed quick legal advice. LegalSnap provided clear guidance on contract matters.",
-    name: "Ramesh from Mumbai",
-    role: "Business Owner",
+    content:
+      "Even while living abroad, I needed help with inheritance law in India. LegalSnap made cross-border legal issues much simpler.",
+    name: "Akshat Jain (NRI)",
+    role: "Overseas Professional",
   },
   {
-    content: "The family law consultation was incredibly helpful. Got structured advice on my divorce proceedings.",
-    name: "Anjali from Delhi",
-    role: "Individual",
+    content:
+      "Running a startup in Noida, I needed guidance on company registration. LegalSnap saved me time and stress.",
+    name: "Yash Chaturvedi from Noida",
+    role: "Startup Founder",
+  },
+  {
+    content:
+      "I wasn’t sure how to proceed with a cyber harassment complaint. LegalSnap guided me step by step with clear advice.",
+    name: "Ruqayya Shah from Saharanpur",
+    role: "Student",
+  },
+  {
+    content:
+      "During a property transfer in Delhi, I was confused about stamp duty and registration. LegalSnap made it effortless.",
+    name: "Tejas Chauhan from Delhi",
+    role: "Homebuyer",
   },
 ];
+
 
 const faqs = [
   {

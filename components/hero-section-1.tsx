@@ -78,19 +78,10 @@ export function HeroSection() {
                                       <Gavel className="w-4 h-4 mr-2" />
                                       Lag Gaye Law
                                     </div>
-                        
                                     <h1
-                                        className="mt-8 max-w-4xl mx-auto text-balance text-5xl md:text-7xl lg:mt-16 xl:text-[4.5rem] text-white font-bold">
-                                        AI Legal Voice Agent for India
-                                        <br />
-                                        <span className="block mt-2 text-blue-400 text-3xl md:text-4xl font-semibold">
-                                          <FlipWords words={["Instant", "Reliable", "Expert", "Secure"]} />
-                                        </span>
+                                        className="mt-8 max-w-4xl mx-auto text-balance text-5xl md:text-7xl lg:mt-16 xl:text-[4.5rem] text-white font-bold ">
+                                            Legal Help that’s <br /><span className="text-blue-400"><FlipWords words={["No Cap", "Lowkey Smart", "AI-Pilled", "Built Different"]} /></span>
                                     </h1>
-                                    <p
-                                        className="mx-auto mt-8 max-w-2xl text-balance text-xl text-gray-300">
-                                        Get instant, expert legal advice by voice. Trained on Indian law. Secure, private, and always available.
-                                    </p>
                                 </AnimatedGroup>
 
                                 <AnimatedGroup
@@ -154,7 +145,7 @@ export function HeroSection() {
                                     <div className="relative rounded-2xl bg-black border border-zinc-700 p-1">
                                         <img
                                             className="aspect-15/8 rounded-2xl"
-                                            src="https://tailark.com//_next/image?url=%2Fmail2.png&w=3840&q=75"
+                                            src="/hero.png"
                                             alt="app screen"
                                             width="2700"
                                             height="1440"
