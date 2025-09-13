@@ -18,6 +18,7 @@ import axios from 'axios'
 import SuggestedLawyerCard from './SuggestedLawyerCard'
 import { useRouter } from 'next/navigation'
 import { AILawyerAgents } from '@/shared/list'
+import { useAuth } from '@clerk/nextjs'
 
 function AddNewSessionDialog() {
     const [note, setNote] = useState<string>()
@@ -27,6 +28,12 @@ function AddNewSessionDialog() {
     const router = useRouter()
     const [historyList, setHistoryList] = useState<any[]>([])
     const [dialogOpen, setDialogOpen] = useState(false)
+    const {has} = useAuth();
+
+    //@ts-ignore
+    const paidUser = has && has ({
+        plan:"pro"
+    })
 
     useEffect(() => {
         GetHistoryList()
@@ -94,7 +101,7 @@ function AddNewSessionDialog() {
     return (
         <Dialog open={dialogOpen} onOpenChange={handleDialogChange}>
             <DialogTrigger>
-                <Button className='mt-3 cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-lg'>+ Start a Consultation</Button>
+                <Button className='mt-3 cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-lg' disabled={!paidUser || historyList.length >= 4}>+ Start a Consultation</Button>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
