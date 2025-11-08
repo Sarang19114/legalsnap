@@ -40,6 +40,7 @@ import { Cover } from "@/components/ui/cover";
 import { Spotlight } from "@/components/ui/spotlight-new";
 import { cn } from "@/lib/utils";
 import { HeroSection } from "@/components/hero-section-1";
+import Footer from "@/components/footer";
 
 export default function LandingPage() {
   const words = ["Instant", "Reliable", "Expert", "Secure"];
@@ -567,9 +568,12 @@ export default function LandingPage() {
           </div>
         </div>
       </footer>
+      <Footer />
     </div>
   );
 }
+
+
 
 const menuItems = [
     { name: 'Features', href: '#features' },

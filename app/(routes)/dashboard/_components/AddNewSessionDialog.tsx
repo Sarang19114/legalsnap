@@ -40,8 +40,14 @@ function AddNewSessionDialog() {
     }, [])
 
     const GetHistoryList = async () => {
-        const result = await axios.get('/api/session-chat?sessionId=all')
-        setHistoryList(result.data)
+        try {
+            const result = await axios.get('/api/session-chat?sessionId=all')
+            setHistoryList(result.data)
+        } catch (error) {
+            console.error('Failed to fetch history list:', error)
+            // Set empty array as fallback to prevent UI issues
+            setHistoryList([])
+        }
     }
 
     const onClickNext = async () => {
@@ -100,8 +106,8 @@ function AddNewSessionDialog() {
 
     return (
         <Dialog open={dialogOpen} onOpenChange={handleDialogChange}>
-            <DialogTrigger>
-                <Button className='mt-3 cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-lg' disabled={!paidUser || historyList.length >= 4}>+ Start a Consultation</Button>
+            <DialogTrigger asChild>
+                <Button className='mt-3 cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-lg'>+ Start a Consultation</Button>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
@@ -124,7 +130,9 @@ function AddNewSessionDialog() {
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter>
-                    <DialogClose> <Button variant={'outline'} className='cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-md'>Cancel</Button> </DialogClose>
+                    <DialogClose asChild> 
+                        <Button variant={'outline'} className='cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-md'>Cancel</Button> 
+                    </DialogClose>
                     {!suggestedLawyers.length ? <Button disabled={!note || loading} onClick={onClickNext} className='cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-lg'> Next {loading ? <Loader2 className='animate-spin' /> : <ArrowRight />} </Button>
                         : <Button disabled={loading || !selectedLawyer} onClick={onStartConsultation} className='cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-lg'>Start Consultation {loading ? <Loader2 className='animate-spin' /> : <ArrowRight />}</Button>}
                 </DialogFooter>

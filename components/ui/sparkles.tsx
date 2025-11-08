@@ -22,7 +22,7 @@ export const SparklesCore = ({
 }: SparklesCoreProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particles = useRef<any[]>([]);
-  const animationFrameId = useRef<number>();
+  const animationFrameId = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const canvas = canvasRef.current;

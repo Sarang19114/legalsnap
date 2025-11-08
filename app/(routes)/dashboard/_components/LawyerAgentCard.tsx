@@ -38,18 +38,26 @@ function LawyerAgentCard({ lawyerAgent }: props) {
                 notes: "new query", 
                 selectedLawyer: lawyerAgent
             });
-            setIsLoading(false);
             if (result.data?.sessionId) {
-                router.push(`/dashboard/lawyer-agent?sessionId=${result.data.sessionId}`);
+                router.push(`/dashboard/lawyer-agent/${result.data.sessionId}`);
+            } else {
+                console.error("No sessionId returned from API:", result.data);
+                alert("Failed to create session. Please try again.");
             }
-        } catch (error) {
             setIsLoading(false);
-            console.log(error);
+        } catch (error: any) {
+            setIsLoading(false);
+            console.error("Error starting consultation:", error);
+            const errorMessage = error?.response?.data?.details || 
+                                error?.response?.data?.error || 
+                                error?.message || 
+                                "Failed to start consultation. Please try again.";
+            alert(errorMessage);
         }
     }
     return (
-        <div className="flex flex-col justify-between items-center w-[260px] h-[410px] bg-white border border-gray-200 rounded-2xl shadow-md p-4 transition-all duration-200 hover:shadow-lg hover:scale-[1.03]">
-            <Badge className='absolute right-0 m-2'>
+        <div className="relative flex flex-col justify-between items-center w-[260px] h-[410px] bg-white border border-gray-200 rounded-2xl shadow-md p-4 transition-all duration-200 hover:shadow-lg hover:scale-[1.03]">
+            <Badge className='absolute top-2 right-2'>
                 {lawyerAgent.subscriptionRequired ? "Premium" : "free"}
             </Badge>
             <Image
@@ -67,7 +75,7 @@ function LawyerAgentCard({ lawyerAgent }: props) {
                     {lawyerAgent.description}
                 </p>
             </div>
-            <Button className="w-full mt-0.5 h-9 text-sm" onClick={onStartConsultation} disabled={!paidUser && lawyerAgent.subscriptionRequired}>
+            <Button className="w-full mt-0.5 h-9 text-sm" onClick={onStartConsultation}>
                 Start Consultation{" "}
                 {isLoading ? <LoaderIcon className="animate-spin ml-1" /> : <IconArrowRight className="ml-1" />}
             </Button>

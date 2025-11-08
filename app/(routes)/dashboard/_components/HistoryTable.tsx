@@ -15,9 +15,10 @@ import ViewLegalReportDialog from "./ViewLegalReportDialog";
 
 type Props = {
     HistoryList: SessionDetails[];
+    autoOpenSessionId?: string | null;
 }
 
-function HistoryTable({ HistoryList }: Props) {
+function HistoryTable({ HistoryList, autoOpenSessionId }: Props) {
     return (
         <div>
             <Table>
@@ -40,7 +41,10 @@ function HistoryTable({ HistoryList }: Props) {
                             <TableCell>{moment(new Date(record.createdAt)).fromNow()}</TableCell>
                             <TableCell className="text-right">
                                 <Button variant={"link"} size={"sm"}>
-                                    <ViewLegalReportDialog record={record} />
+                                    <ViewLegalReportDialog 
+                                        record={record} 
+                                        autoOpen={autoOpenSessionId === record.sessionId}
+                                    />
                                 </Button>
                             </TableCell>
                         </TableRow>

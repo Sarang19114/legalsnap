@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "regions": ["sin1"],
+  "env": {
+    "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_aGVscGluZy13ZWV2aWwtNjAuY2xlcmsuYWNjb3VudHMuZGV2JA",
+    "NEXT_PUBLIC_CLERK_SIGN_IN_URL": "/sign-in",
+    "NEXT_PUBLIC_CLERK_SIGN_UP_URL": "/sign-up",
+    "NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL": "/",
+    "NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL": "/",
+    "NEXT_PUBLIC_VAPI_VOICE_ASSISTANT_ID": "bf8974da-4e27-4e53-b937-0a4a3941cef9",
+    "NEXT_PUBLIC_VAPI_API_KEY": "a9a6c2aa-8070-42c2-89f1-6c0380c3ced9",
+    "DATABASE_URL": "@database_url",
+    "OPEN_ROUTER_API_KEY": "@open_router_api_key",
+    "CLERK_SECRET_KEY": "@clerk_secret_key"
+  }
+}
