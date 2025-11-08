@@ -40,7 +40,7 @@ import { Cover } from "@/components/ui/cover";
 import { Spotlight } from "@/components/ui/spotlight-new";
 import { cn } from "@/lib/utils";
 import { HeroSection } from "@/components/hero-section-1";
-import Footer from "@/components/footer";
+import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
 
 export default function LandingPage() {
   const words = ["Instant", "Reliable", "Expert", "Secure"];
@@ -491,8 +491,35 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-20 border-t border-white/10 relative bg-black">
+      <footer className="py-8 border-t border-white/10 relative bg-black">
         <div className="container mx-auto px-4">
+          {/* The W Developers Section */}
+          <div className="mb-6">
+            <div className="flex flex-row items-center justify-start w-full">
+              <span className="self-center text-2xl font-semibold whitespace-nowrap pr-4 text-white">
+                The W Developers:
+              </span>
+              <AnimatedTooltip items={[
+                {
+                  id: 1,
+                  name: "Janvi Chauhan",
+                  designation: "FullStack & AI Agent Developer",
+                  image: "/janvi.png",
+                  linkedin: "https://www.linkedin.com/in/janvi-chauhan-9297a92a1/",
+                  github: "https://github.com/janvi-c16",
+                },
+                {
+                  id: 2,
+                  name: "Sarang Rastogi",
+                  designation: "FullStack Developer",
+                  linkedin: "https://www.linkedin.com/in/sarang-rastogi-498948249/",
+                  github: "https://github.com/Sarang19114",
+                  image: "/sarang.png",
+                },
+              ]} />
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-4 gap-12">
             <div>
               <Link href="/" className="flex items-center space-x-2 group mb-6">
@@ -561,14 +588,29 @@ export default function LandingPage() {
               </ul>
             </div>
           </div>
-          <div className="mt-20 pt-8 border-t border-white/10 text-center text-gray-400">
+          <div className="mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-gray-400">
             <p>
               &copy; {new Date().getFullYear()} LegalSnap. All rights reserved.
             </p>
+            <div className="flex items-center gap-4 mt-4 md:mt-0">
+              <a
+                href="https://github.com/Sarang19114"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-blue-400 transition-colors text-sm"
+              >
+                Github
+              </a>
+              <a
+                href="mailto:rastogi.sarang19@gmail.com"
+                className="hover:text-blue-400 transition-colors text-sm"
+              >
+                Contact
+              </a>
+            </div>
           </div>
         </div>
       </footer>
-      <Footer />
     </div>
   );
 }
