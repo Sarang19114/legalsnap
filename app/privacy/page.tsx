@@ -1,4 +1,3 @@
-import Footer from "@/components/footer";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -109,7 +108,6 @@ export default function PrivacyPage() {
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 }
